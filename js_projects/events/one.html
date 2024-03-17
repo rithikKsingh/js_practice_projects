@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>htnml Events</title>
+  </head>
+  <body style="background-color: #414141; color: aliceblue">
+    <h2>Amazing image</h2>
+    <div>
+      <ul id="images">
+        <li>
+          <img
+            width="200px"
+            id="photoshop"
+            src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt="photoshop"
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="japan"
+            src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="river"
+            src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="owl"
+            src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="prayer"
+            src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <a style="color: aliceblue" href="https://google.com" id="google"
+            >Google</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    //    document.getElementById("owl").onclick = function () {
+    //      alert("owl clicked");
+    //    };
+
+    //    document.getElementById("owl").addEventListener("click", function () {
+    //      alert("owl clicked again");
+    //    });
+
+    //    document.getElementById("owl").addEventListener("click", function (e) {
+    //    console.log(e);
+    //    });
+    //Output: gives all the information related to the event:
+    //timestamp, clientX, clientY etc..
+
+    //    document.getElementById("owl").addEventListener("click", function (e) {
+    //      console.log(e.target);
+    //    });
+    //Output :<img width="200px" id="owl" src="https://images.pexels..">
+
+    //    document.getElementById("owl").addEventListener("click", function (e) {
+    //      console.log(e.target.value);
+    //    });
+    //Note:here at the end you can write "false" or "true". By default it's false
+    // document.get...},false/true)
+
+    //**********************************************************************
+    // Event Propogation:
+    // two types: 1.Event bubbling   2.Event Capturing
+    // Event bubbling id by default.(where there is false)
+    //    document.getElementById("images").addEventListener('click',function(e){
+    //      console.log("clicked inside the ul")
+    //   },false)
+
+    //   document.getElementById("owl").addEventListener('click',function(e){
+    //       console.log("owl clicked")
+    //   },false)
+
+    //Explaination: when any part of ul is clicked other than owl
+    //output : "clicked inside the ul"
+    //when you click on owl, first you get "owl clicked" and then "clicked inside the ul"
+    //this is because of event propogation i.e: bubbling up
+    //going from inside to outside
+
+    //Event capturing:going from outside to inside
+    //    document.getElementById("images").addEventListener("click",function (e) {
+    //        console.log("clicked inside the ul");
+    //      },true);
+    //    document.getElementById("owl").addEventListener("click",function (e) {
+    //        console.log("owl clicked");
+    //      },true);
+    //output:first you get: "clicked inside the ul" and then "owl clicked"
+
+    //To seperate inner and outer element,use e.stopPropagation()
+    //it prevents bubbling, i.e prevent event from going to outer element
+    //        document.getElementById("images").addEventListener("click",function (e) {
+    //            console.log("clicked inside the ul");
+    //          },false);
+    //        document.getElementById("owl").addEventListener("click",function (e) {
+    //            console.log("owl clicked");
+    //            e.stopPropagation();
+    //          },false);
+    //Output: here when you will click on "owl", you will get "owl clicked" only
+
+    //preventDefault()
+    //    document.getElementById('google').addEventListener('click',function(e){
+    //       e.preventDefault();//will prevent from going to google.com when linked is clicked
+    //       console.log("google is clicked")
+    //    },false)
+
+    //removing images when clicked on them
+    document.querySelector("#images").addEventListener("click", function (e) {
+      //    console.log(e.target.parentNode);
+      console.log(e.target.tagName);
+      if (e.target.tagName === "IMG") {
+        let removeIt = e.target.parentNode;
+        removeIt.remove();
+      }
+    });
+  </script>
+</html>
